@@ -35,14 +35,14 @@ def main(file: str, mode: str = "first half") -> int:
 
             my_move = HAND_POSITION[chr(ord(second_char) - 23)] # Map X,Y,Z to A,B,C
             move_diff = my_move - HAND_POSITION[first_char]
-            total_points += MOVE_DIFF_POINTS_MAP[move_diff % 3] + my_move # use module for "looping" around the dict (e.g. -2 -> 1)
+            total_points += MOVE_DIFF_POINTS_MAP[move_diff % 3] + my_move # use modulo for "looping" around the dict (e.g. -2 -> 1)
         
         elif mode == "second half":
 
             wanted_points = WANTED_POINTS_ENCODING[second_char]
             needed_move_diff = INV_MOVE_DIFF_POINTS_MAP[wanted_points]
             my_move = (HAND_POSITION[first_char] + needed_move_diff) % 3
-            my_move = 3 if my_move == 0 else my_move # stupid fix for the module, which returns 0 for scissors move, whereas we expect 3
+            my_move = 3 if my_move == 0 else my_move # stupid fix for the modulo, which returns 0 for scissors move, whereas we expect 3
             total_points += wanted_points + my_move
 
     return total_points
